@@ -67,8 +67,8 @@ namespace AsyncBreakfast
             }
             Console.WriteLine("Start toasting...");
             await Task.Delay(2000);
-            Console.WriteLine("Fire! Toast is ruined!");
-            throw new InvalidOperationException("The toaster is on fire");
+            // Console.WriteLine("Fire! Toast is ruined!");
+            // throw new InvalidOperationException("The toaster is on fire");
             await Task.Delay(1000);
             Console.WriteLine("Remove toast from toaster");
 
