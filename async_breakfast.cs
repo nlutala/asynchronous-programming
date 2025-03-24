@@ -12,18 +12,18 @@ namespace AsyncBreakfast
 
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Coffee cup = PourCoffee();
             Console.WriteLine("coffee is ready");
 
-            Egg eggs = FryEggs(2);
+            Egg eggs = await FryEggsAsync(2);
             Console.WriteLine("eggs are ready");
 
-            Bacon bacon = FryBacon(3);
+            Bacon bacon = await FryBaconAsync(3);
             Console.WriteLine("bacon is ready");
 
-            Toast toast = ToastBread(2);
+            Toast toast = await ToastBreadAsync(2);
             ApplyButter(toast);
             ApplyJam(toast);
             Console.WriteLine("toast is ready");
