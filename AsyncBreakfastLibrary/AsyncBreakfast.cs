@@ -39,11 +39,7 @@ namespace AsyncBreakfast
             await Task.WhenAll(eggsTask, baconTask, toastTask);
             Console.WriteLine("Eggs are ready");
             Console.WriteLine("Bacon is ready");
-            Console.WriteLine("Toast is ready");
-
-            Juice oj = PourOJ();
-            Console.WriteLine("oj is ready");
-            Console.WriteLine("Breakfast is ready!"); */
+            Console.WriteLine("Toast is ready"); */
 
             // Using Task.WhenAny to process tasks as they complete
             var breakfastTasks = new List<Task> { eggsTask, baconTask, toastTask };
@@ -65,6 +61,10 @@ namespace AsyncBreakfast
                 await finishedTask;
                 breakfastTasks.Remove(finishedTask);
             }
+
+            Juice oj = PourOJ();
+            Console.WriteLine("oj is ready");
+            Console.WriteLine("Breakfast is ready!");
         }
 
         private static Juice PourOJ()
