@@ -25,14 +25,20 @@ namespace AsyncBreakfast
             var baconTask = FryBaconAsync(3);
             var toastTask = MakeToastWithButterAndJamAsync(2);
 
-            var eggs = await eggsTask;
+            /* var eggs = await eggsTask;
             Console.WriteLine("eggs are ready");
 
             var bacon = await baconTask;
             Console.WriteLine("bacon is ready");
 
             var toast = await toastTask;
-            Console.WriteLine("toast is ready");
+            Console.WriteLine("toast is ready"); */
+
+            // A way to apply await expressions to tasks efficiently
+            await Task.WhenAll(eggsTask, baconTask, toastTask);
+            Console.WriteLine("Eggs are ready");
+            Console.WriteLine("Bacon is ready");
+            Console.WriteLine("Toast is ready");
 
             Juice oj = PourOJ();
             Console.WriteLine("oj is ready");
