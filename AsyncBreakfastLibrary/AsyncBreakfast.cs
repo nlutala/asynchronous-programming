@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AsyncBreakfast
@@ -34,7 +35,7 @@ namespace AsyncBreakfast
             var toast = await toastTask;
             Console.WriteLine("toast is ready"); */
 
-            // A way to apply await expressions to tasks efficiently
+            /* A way to apply await expressions to tasks efficiently
             await Task.WhenAll(eggsTask, baconTask, toastTask);
             Console.WriteLine("Eggs are ready");
             Console.WriteLine("Bacon is ready");
@@ -42,7 +43,28 @@ namespace AsyncBreakfast
 
             Juice oj = PourOJ();
             Console.WriteLine("oj is ready");
-            Console.WriteLine("Breakfast is ready!");
+            Console.WriteLine("Breakfast is ready!"); */
+
+            // Using Task.WhenAny to process tasks as they complete
+            var breakfastTasks = new List<Task> { eggsTask, baconTask, toastTask };
+            while (breakfastTasks.Count > 0)
+            {
+                Task finishedTask = await Task.WhenAny(breakfastTasks);
+                if (finishedTask == eggsTask)
+                {
+                    Console.WriteLine("Eggs are ready");
+                }
+                else if (finishedTask == baconTask)
+                {
+                    Console.WriteLine("Bacon is ready");
+                }
+                else if (finishedTask == toastTask)
+                {
+                    Console.WriteLine("Toast is ready");
+                }
+                await finishedTask;
+                breakfastTasks.Remove(finishedTask);
+            }
         }
 
         private static Juice PourOJ()
