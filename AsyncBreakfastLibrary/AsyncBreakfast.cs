@@ -15,24 +15,23 @@ namespace AsyncBreakfast
         static async Task Main(string[] args)
         {
             Coffee cup = PourCoffee();
-            Console.WriteLine("Coffee is ready");
+            Console.WriteLine("coffee is ready");
 
-            Task<Egg> eggsTask = FryEggsAsync(2);
-            Task<Bacon> baconTask = FryBaconAsync(3);
-            Task<Toast> toastTask = ToastBreadAsync(2);
+            var eggsTask = FryEggsAsync(2);
+            var baconTask = FryBaconAsync(3);
+            var toastTask = MakeToastWithButterAndJamAsync(2);
 
-            Toast toast = await toastTask;
-            ApplyButter(toast);
-            ApplyJam(toast);
-            Console.WriteLine("Toast is ready");
+            var eggs = await eggsTask;
+            Console.WriteLine("eggs are ready");
+
+            var bacon = await baconTask;
+            Console.WriteLine("bacon is ready");
+
+            var toast = await toastTask;
+            Console.WriteLine("toast is ready");
+
             Juice oj = PourOJ();
-            Console.WriteLine("Oj is ready");
-
-            Egg eggs = await eggsTask;
-            Console.WriteLine("Eggs are ready");
-            Bacon bacon = await baconTask;
-            Console.WriteLine("Bacon is ready");
-
+            Console.WriteLine("oj is ready");
             Console.WriteLine("Breakfast is ready!");
         }
 
@@ -40,6 +39,15 @@ namespace AsyncBreakfast
         {
             Console.WriteLine("Pouring orange juice");
             return new Juice();
+        }
+
+        static async Task<Toast> MakeToastWithButterAndJamAsync(int number)
+        {
+            var toast = await ToastBreadAsync(number);
+            ApplyButter(toast);
+            ApplyJam(toast);
+
+            return toast;
         }
 
         private static void ApplyJam(Toast toast) =>
